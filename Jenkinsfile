@@ -20,8 +20,15 @@ pipeline {
         sh 'cat trufflehog_results' 
        }
     }
-    
-    
+    stage ('Dependencies Analysis') {
+      steps {
+          sh 'rm owasp*'
+          sh 'wget "https://raw.githubusercontent.com/DevOpsInterner/webapp-pipeline/master/dependency-check.sh"' 
+          sh 'chmod +x dependency-check.sh'
+          sh './dependency-check.sh'
+          sh ''
+       }
+    }
     stage ('Build') {
       steps {
       sh 'mvn clean package'
