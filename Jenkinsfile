@@ -22,7 +22,7 @@ pipeline {
     }
     stage ('Dependencies Analysis') {
       steps {
-          sh 'rm owasp*'
+          sh 'rm owasp* 2>/dev/null'
           sh 'wget "https://raw.githubusercontent.com/DevOpsInterner/webapp-pipeline/master/dependency-check.sh"' 
           sh 'chmod +x dependency-check.sh'
           sh './dependency-check.sh'
