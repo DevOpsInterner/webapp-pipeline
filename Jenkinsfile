@@ -25,7 +25,7 @@ pipeline {
           sh '''
                   FILE=dependency-check.sh
                   if ! test -f "$FILE"; then
-                     wget "https://raw.githubusercontent.com/DevOpsInterner/webapp-pipeline/master/dependency-check.sh
+                     wget "https://raw.githubusercontent.com/DevOpsInterner/webapp-pipeline/master/dependency-check.sh"
                   fi
                   chmod +x dependency-check.sh
                   bash dependency-check.sh
