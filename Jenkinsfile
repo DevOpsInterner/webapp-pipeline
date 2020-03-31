@@ -11,8 +11,7 @@ pipeline {
                     echo "M2_HOME = ${M2_HOME}"
             ''' 
       }
-    }
-   
+    }  
   stage ('GitCheckSecrets') {
       steps {
         sh 'rm trufflehog_results || true'
@@ -23,36 +22,15 @@ pipeline {
     stage ('Dependencies Analysis') {
       steps {
           sh 'rm owasp* || true'
-          sh 'wget "https://raw.githubusercontent.com/DevOpsInterner/webapp-pipeline/master/dependency-check.sh" ' 
-          sh 'chmod +x dependency-check.sh'
-          sh 'bash dependency-check.sh'
+          sh '''
+                  FILE=dependency-check.sh
+                  if ! test -f "$FILE"; then
+                     wget "https://raw.githubusercontent.com/DevOpsInterner/webapp-pipeline/master/dependency-check.sh
+                  fi
+                  chmod +x dependency-check.sh
+                  bash dependency-check.sh
+             '''
        }
     }
-    
-      stage ('SAST') {
-        steps {
-          withSonarQubeEnv('sonar') {
-            sh 'mvn sonar:sonar'
-            sh 'cat target/sonar/report-task.txt'
-          }
-        }
-      }
-    
-    
-    stage ('Build') {
-      steps {
-      sh 'mvn clean package'
-       }
-    }
-   
-    
-     stage ('Deploy-To-Tomcat') {
-            steps {
-              sh 'scp -o StrictHostKeyChecking=no target/*.war  /opt/apache-tomcat-9.0.33/webapps/webapp-pipeline.war'
-              }         
-    }
-    
-    
   }
-
 }
