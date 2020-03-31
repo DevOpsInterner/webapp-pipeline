@@ -56,18 +56,18 @@
     <!-- Example row of columns -->
     <div class="row">
         <div class="col-md-4">
-            <h2>Fact</h2>
+            <h2 style='color:red'>Fact 1</h2>
             <p> While Commiting changes in the source code, github is pushing every changes either developers team or operations team and re doing  the same steps as the first time and commiting these changes into the real time web app.</p>
             <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">
-            <h2>Fact 2</h2>
+            <h2 style='color:orange'>Fact 2</h2>
             <p>DevOps is Great, The big reason is that you do the hard work just at the beginning of your project, after commiting changes to your application, everything will be automated and clients need just to wait for some seconds and they'll find the new application is online.</p>
             <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
         <div class="col-md-4">
-            <h2>Fact 3</h2>
-            <p></p>
+            <h2 style='color:green'>Fact 3</h2>
+            <p>Fact2 is really great indeed, but to make it even greater is by intergrating security in every possible steps and place to make it like </p>
             <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div>
     </div>
