@@ -26,7 +26,7 @@ pipeline {
           sh 'wget "https://raw.githubusercontent.com/DevOpsInterner/webapp-pipeline/master/dependency-check.sh" ' 
           sh 'chmod +x dependency-check.sh'
           sh 'bash dependency-check.sh'
-          sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml'
+          sh 'true || cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml why this is not working'
        }
     }
     
