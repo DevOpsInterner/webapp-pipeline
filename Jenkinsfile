@@ -15,7 +15,7 @@ pipeline {
    
   stage ('GitCheckSecrets') {
       steps {
-        sh 'rm trufflehog_results 2>/dev/null'
+        sh 'rm trufflehog_results || true'
         sh 'docker run dxa4481/trufflehog --json https://github.com/DevOpsInterner/webapp-pipeline.git > trufflehog_results'
         sh 'cat trufflehog_results' 
        }
