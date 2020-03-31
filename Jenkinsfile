@@ -55,7 +55,14 @@ pipeline {
             steps {
               sh 'scp -o StrictHostKeyChecking=no target/*.war  /opt/apache-tomcat-9.0.33/webapps/webapp-pipeline.war'
               }         
-    
     }
+    
+    stage ('DAST') {
+      steps {
+         sh ' "docker run -t owasp/zap2docker-live zap-baseline.py -t http://192.168.1.10:4455/webapp-pipeline/" || true'
+      }
+    }
+    
+    
   }
 }
