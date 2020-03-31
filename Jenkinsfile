@@ -30,6 +30,7 @@ pipeline {
                   chmod +x dependency-check.sh
                   bash dependency-check.sh
              '''
+          sh 'cat /var/lib/jenkins/workspace/webapp-pipeline/odc-reports/dependency-check-report.xml'
        }
     }
   }
