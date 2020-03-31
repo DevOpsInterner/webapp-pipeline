@@ -11,14 +11,16 @@ pipeline {
                     echo "M2_HOME = ${M2_HOME}"
             ''' 
       }
-    }  
-  stage ('GitCheckSecrets') {
+    }
+    
+   stage ('GitCheckSecrets') {
       steps {
         sh 'rm trufflehog_results || true'
         sh 'docker run dxa4481/trufflehog --json https://github.com/DevOpsInterner/webapp-pipeline.git > trufflehog_results'
         sh 'cat trufflehog_results' 
        }
     }
+    
     stage ('Dependencies Analysis') {
       steps {
           sh 'rm owasp* || true'
@@ -32,6 +34,28 @@ pipeline {
              '''
           sh 'cat /var/lib/jenkins/workspace/webapp-pipeline/odc-reports/dependency-check-report.xml'
        }
+    }
+    
+    stage ('SAST') {
+        steps {
+          withSonarQubeEnv('sonar') {
+            sh 'mvn sonar:sonar'
+            sh 'cat target/sonar/report-task.txt'
+          }
+        }
+      }
+
+    stage ('Build') {
+      steps {
+      sh 'mvn clean package'
+       }
+    }
+    
+    stage ('Deploy-To-Tomcat') {
+            steps {
+              sh 'scp -o StrictHostKeyChecking=no target/*.war  /opt/apache-tomcat-9.0.33/webapps/webapp-pipeline.war'
+              }         
+    
     }
   }
 }
