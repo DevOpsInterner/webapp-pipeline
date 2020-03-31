@@ -23,9 +23,9 @@ pipeline {
     stage ('Dependencies Analysis') {
       steps {
           sh 'rm owasp* || true'
-          sh 'wget "https://raw.githubusercontent.com/DevOpsInterner/webapp-pipeline/master/dependency-check.sh"' 
+          sh 'wget "https://raw.githubusercontent.com/DevOpsInterner/webapp-pipeline/master/dependency-check.sh" ' 
           sh 'chmod +x dependency-check.sh'
-          sh './dependency-check.sh'
+          sh 'bash dependency-check.sh'
           sh 'cat /var/lib/jenkins/OWASP-Dependency-Check/reports/dependency-check-report.xml'
        }
     }
